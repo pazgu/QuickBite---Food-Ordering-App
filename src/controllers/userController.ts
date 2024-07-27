@@ -13,11 +13,32 @@ const createCurrentUser = async (req: Request, res: Response) => {
     return res.status(201).json(newUser.toObject());
     //remove Mongoose-specific properties and methods, leaving with a plain Js object
   } catch (error) {
-    console.log(error);
+    console.log("createCurrentUser function", error);
     res.status(500).json({ message: "Error creating user" });
+  }
+};
+
+const updateCurrentUser = async (req: Request, res: Response) => {
+  try {
+    const { name, adressLine1, country, city } = req.body;
+    const user = await User.findById(req.userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    user.name = name;
+    user.addressLine1 = adressLine1;
+    user.country = country;
+    user.city = city;
+
+    await user.save();
+    res.send(user);
+  } catch (error) {
+    console.log("updateCurrentUser function", error);
+    res.status(500).json({ message: "Error updating user" });
   }
 };
 
 export const userController = {
   createCurrentUser,
+  updateCurrentUser,
 };
