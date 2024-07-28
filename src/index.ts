@@ -12,6 +12,12 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+//Indicating that the server is healthy.
+//useful for monitoring and ensuring that server is running as expected
+app.get("/health", async (req: Request, res: Response) => {
+  res.send({ message: "health OK!" });
+});
+
 app.use("/api/my/user", userRoute);
 
 app.listen(3000, () => {
