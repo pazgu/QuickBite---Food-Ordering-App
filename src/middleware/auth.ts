@@ -25,7 +25,7 @@ export const jwtParse = async (
   next: NextFunction
 ) => {
   const { authorization } = req.headers;
-  if (!authorization || authorization.startsWith("Bearer ")) {
+  if (!authorization || !authorization.startsWith("Bearer ")) {
     return res.sendStatus(401); //to not return any clue for unauthorize user what is wrong
   }
 
@@ -43,6 +43,9 @@ export const jwtParse = async (
     req.userId = user._id.toString();
     next();
   } catch (error) {
-    return res.sendStatus(401);
+    if (error instanceof jwt.JsonWebTokenError) {
+      return res.sendStatus(401);
+    }
+    return res.sendStatus(500);
   }
 };
