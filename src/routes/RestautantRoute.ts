@@ -18,10 +18,10 @@ const upload = multer({
 
 router.post(
   "/",
+  upload.single("imageFile"),
   validateMyRestaurantRequest,
   jwtCheck,
   jwtParse,
-  upload.single("imageFile"),
   createMyRestaurant
 );
 
