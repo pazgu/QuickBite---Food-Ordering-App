@@ -39,13 +39,11 @@ export const validateMyRestaurantRequest = [
     .withMessage("Estimated delivery time must be a postivie integar"),
   body("cuisines")
     .isArray()
-    .withMessage("Cuisines must include more than one cuisine")
+    .withMessage("Cuisines must be an array")
     .not()
     .isEmpty()
     .withMessage("Cuisines cannot be empty"),
-  body("menuItems")
-    .isArray()
-    .withMessage("Menu items must include more than one item"),
+  body("menuItems").isArray().withMessage("Menu items must be an array"),
   body("menuItems.*.name").notEmpty().withMessage("Menu item name is required"), // * -for each menuItem name
   body("menuItems.*.price")
     .isFloat({ min: 0 })
