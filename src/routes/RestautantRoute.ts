@@ -6,7 +6,7 @@ import { validateMyRestaurantRequest } from "../middleware/validation";
 
 const router = express.Router();
 
-const { createMyRestaurant } = RestaurantController;
+const { getMyRestaurant, createMyRestaurant } = RestaurantController;
 
 const storage = multer.memoryStorage();
 const upload = multer({
@@ -15,6 +15,8 @@ const upload = multer({
     fileSize: 5 * 1024 * 1024, //5mb
   },
 });
+
+router.get("/", jwtCheck, jwtParse, getMyRestaurant);
 
 router.post(
   "/",
