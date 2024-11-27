@@ -7,7 +7,7 @@ const getMyRestaurant = async (req: Request, res: Response) => {
   try {
     const restaurant = await Restaurant.findOne({ user: req.userId });
     //user can have only one restaurant
-    if (restaurant) {
+    if (!restaurant) {
       return res.status(404).json({ message: "Restaurant not found" });
     }
     res.json(restaurant);
