@@ -6,7 +6,7 @@ import cloudinary from "cloudinary";
 const createMyRestaurant = async (req: Request, res: Response) => {
   try {
     const existingRestaurant = await Restaurant.findOne({ user: req.userId });
-    console.log(req.userId);
+    //console.log(req.userId);
 
     if (existingRestaurant) {
       return res
