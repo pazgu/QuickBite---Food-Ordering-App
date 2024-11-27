@@ -6,7 +6,8 @@ import { validateMyRestaurantRequest } from "../middleware/validation";
 
 const router = express.Router();
 
-const { getMyRestaurant, createMyRestaurant } = RestaurantController;
+const { getMyRestaurant, createMyRestaurant, updateMyRestaurant } =
+  RestaurantController;
 
 const storage = multer.memoryStorage();
 const upload = multer({
@@ -25,6 +26,15 @@ router.post(
   jwtCheck,
   jwtParse,
   createMyRestaurant
+);
+
+router.put(
+  "/",
+  upload.single("imageFile"),
+  validateMyRestaurantRequest,
+  jwtCheck,
+  jwtParse,
+  updateMyRestaurant
 );
 
 export default router;
