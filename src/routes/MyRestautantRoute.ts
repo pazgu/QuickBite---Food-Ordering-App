@@ -1,13 +1,13 @@
 import express from "express";
 import multer from "multer";
-import RestaurantController from "../controllers/myRestaurantController";
+import myRestaurantController from "../controllers/myRestaurantController";
 import { jwtCheck, jwtParse } from "../middleware/auth";
 import { validateMyRestaurantRequest } from "../middleware/validation";
 
 const router = express.Router();
 
 const { getMyRestaurant, createMyRestaurant, updateMyRestaurant } =
-  RestaurantController;
+  myRestaurantController;
 
 const storage = multer.memoryStorage();
 const upload = multer({

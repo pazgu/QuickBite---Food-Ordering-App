@@ -1,5 +1,5 @@
 import express from "express";
-import { userController } from "../controllers/userController";
+import { userController } from "../controllers/MyUserController";
 import { jwtCheck, jwtParse } from "../middleware/auth";
 import { validateMyUserRequest } from "../middleware/validation";
 
